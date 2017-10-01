@@ -1,0 +1,183 @@
+@mixin breakpoint($point) {
+    @if $point==largedesktop {
+        html.ie8 & {
+            @content;
+        }
+
+        @media (min-width: $width-large-desktop) {
+            @content;
+        }
+    }
+    @else if $point==mediumdesktop {
+        html.ie8 & {
+            @content;
+        }
+
+        @media (max-width: $width-large-desktop - 1) {
+            @content;
+        }
+    }
+    @else if $point==desktop {
+        html.ie8 & {
+            @content;
+        }
+
+        @media (min-width: $width-desktop) {
+            @content;
+        }
+    }
+    @else if $point==tablet {
+        @media (min-width: ($width-tablet)) and (max-width: ($width-desktop - 1)) {
+            @content;
+        }
+    }
+    @else if $point==mobile {
+        @media (max-width: ($width-tablet - 1)) {
+            @content;
+        }
+    }
+    @else if $point==hiresmobile {
+        @media (min-width: ($width-mobile)) and (max-width: ($width-tablet - 1)) {
+            @content;
+        }
+    }
+    @else if $point==lores {
+        @media (max-width: ($width-desktop - 1)) {
+            @content;
+        }
+    }
+    @else if $point==hires {
+        html.ie8 & {
+            @content;
+        }
+
+        @media (min-width: ($width-tablet)) {
+            @content;
+        }
+    }
+    @else if $point==smalls { //screen < 480px
+        @media (max-width: (583px)) {
+            @content;
+        }
+    }
+    @else if $point==smallmobile { //screen < 480px
+        @media (max-width: ($width-mobile - 1)) {
+            @content;
+        }
+    }
+}
+
+
+@mixin transform($attr...) {
+    -webkit-transform: #{$attr};
+    -moz-transform: #{$attr};
+    -ms-transform: #{$attr};
+    transform: #{$attr};
+}
+
+@mixin transition($params: all 300ms ease-in-out) {
+    -webkit-transition: #{$params};
+    -ms-transition: #{$params};
+    -moz-transition: #{$params};
+    transition: #{$params};
+}
+
+@mixin animation($params) {
+    -webkit-animation: #{$params};
+    -moz-animation: #{$params};
+    animation: #{$params};
+}
+
+@mixin box-shadow($params...) {
+    -moz-box-shadow: #{$params};
+    -webkit-box-shadow: #{$params};
+    box-shadow: #{$params};
+}
+
+@mixin box-sizing($params) {
+    box-sizing: #{$params};
+    -moz-box-sizing: #{$params};
+    -webkit-box-sizing: #{$params};
+}
+
+//Using: Ex: @include side-padding(20px);
+@mixin side-padding($number_px) {
+    padding-left: $number_px + px;
+    padding-right: $number_px + px;
+}
+
+@mixin backface($params) {
+    -webkit-backface-visibility: $params;
+    -moz-backface-visibility: $params;
+    -o-backface-visibility: $params;
+    backface-visibility: $params;
+}
+
+@mixin opacity($opacity) {
+    opacity: $opacity;
+    $opacityIE: $opacity * 100;
+    filter: alpha(opacity=$opacityIE);
+    // http://www.webcreatorbox.com/en/tutorials/sass-mixin-en/#mixin5
+    // Usage
+    // @include opacity(0.5);
+    // Output
+    // opacity: 0.5;
+    // filter: alpha(opacity=50);
+}
+
+@mixin filter($param) {
+    -webkit-filter: #{$param};
+    filter: #{$param};
+}
+
+@mixin flexbox() {
+    display: -webkit-box;
+    display: -moz-box;
+    display: -ms-flexbox;
+    display: -webkit-flex;
+    display: flex;
+}
+
+@mixin flex($params...) {
+    -webkit-box-flex: #{$params};
+    -moz-box-flex: #{$params};
+    -webkit-flex: #{$params};
+    -ms-flex: #{$params};
+    flex: #{$params};
+}
+
+@mixin clearfix {
+    &:after {
+        content: "";
+        display: table;
+        clear: both;
+    }
+}
+
+@mixin calc($property, $expression) {
+    #{$property}: -moz-calc(#{$expression});
+    #{$property}: -webkit-calc(#{$expression});
+    #{$property}: calc(#{$expression});
+}
+
+@mixin calcInnerWeather() {
+    width: $width-content-weather - $margin-left-hover;
+}
+
+@mixin keyframes($animationName) {
+    @-webkit-keyframes #{$animationName} {
+        @content;
+    }
+
+    @-moz-keyframes #{$animationName} {
+        @content;
+    }
+
+    @-o-keyframes #{$animationName} {
+        @content;
+    }
+
+    @keyframes #{$animationName} {
+        @content;
+    }
+}
